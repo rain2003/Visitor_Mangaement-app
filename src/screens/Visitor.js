@@ -3,6 +3,7 @@ import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-nativ
 import { useNavigation } from '@react-navigation/native';
 import dayjs from 'dayjs';
 import DateTimePicker from 'react-native-ui-datepicker';
+import { ScrollView } from 'react-native';
 
 function Visitor() {
   const [name, setName] = useState('');
@@ -15,6 +16,8 @@ function Visitor() {
   const [mode , setMode ] = useState('date')
   const [show,setShow] = useState(false);
   const [text, setText] = useState('Empty')
+  const [visitDatePlaceholder, setVisitDatePlaceholder] = useState('VisitDate');
+  const [visitTimePlaceholder, SetvisitTimePlaceholder] = useState('VisitTime');
 
   const showMode=(currentMode)=>{
     setShow(true);
@@ -54,9 +57,10 @@ function Visitor() {
   };
 
   return (
+    
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.heading} >Welcome Visitor!!!</Text>
+        <Text style={styles.heading} >Welcome!! Please Enter Your Details</Text>
       </View>
       <View style={styles.cardContainer}>
         <View style={styles.card}>
@@ -72,7 +76,7 @@ function Visitor() {
           />
           <TextInput
             style={styles.input}
-            placeholder="Your Email"
+            placeholder="Email"
             onChangeText={(text) => setVisitorEmail(text)}
           />
           <TextInput
@@ -82,13 +86,19 @@ function Visitor() {
           />
           <TextInput
             style={styles.input}
-            placeholder="Visiting Date"
+            placeholder={visitDatePlaceholder}
+            onFocus={() => setVisitDatePlaceholder('YYYY-MM-DD')}
+            onBlur={() => setVisitDatePlaceholder('VisitDate')}
             onChangeText={(text) => setVisitDate(text)}
+            value={visitDate}
           />
           <TextInput
             style={styles.input}
-            placeholder="Visiting Time"
+            placeholder={visitTimePlaceholder}
+            onFocus={() => SetvisitTimePlaceholder('HH:MM')}
+            onBlur={() => SetvisitTimePlaceholder('VisitTime')}
             onChangeText={(text) => setVisitTime(text)}
+            value={visitTime}
           />
           <TouchableOpacity
             style={styles.button}
@@ -115,7 +125,7 @@ function Visitor() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#e0f2e9',
+    backgroundColor: '#ccffcc',
     justifyContent: 'center',
     alignItems: 'center',
   },
